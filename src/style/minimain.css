@@ -1,0 +1,190 @@
+
+h1, h2, h3, h4, h5, h6 {
+    padding: 0;
+    margin: 0;
+}
+
+.login {
+    width: 100dvw;
+    height: 100dvh;
+    background: url('../../public/banffpay.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blacky {
+    background-color: #191c24;
+    color: white;
+    padding: 50px;
+    min-width: 450px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.blacky form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label, .form-group input {
+    color: white;
+    font-size: 18px;
+}
+
+.form-group label {
+    font-weight: 450;
+}
+
+.form-group input {
+    padding: 10px 3px;
+    outline: green 1.2px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e3e3e418;
+}
+
+form button {
+    width: fit-content;
+    padding: 10px 25px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: aqua;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: rgb(39, 219, 219);
+}
+
+form p {
+    margin: auto;
+    margin-top: 25px;
+}
+
+.dashboard {
+    display: flex;
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.dashboard .sidebar {
+    width: 250px;
+    background-color: aqua;
+}
+
+.dashboard .mainDash {
+    flex: 1;
+    background-color: antiquewhite;
+    overflow: auto;
+}
+
+.dashboard .topdashnav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    box-shadow: 3px 0px 14px 5px #979393b5;
+}
+
+.dashboard .topdashnav h4 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.topdashnav button {
+    padding: 8px 32px;
+    background-color: aquamarine;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: capitalize;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    margin: 20px 0;
+}
+
+.top-major {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    margin-top: 20px;
+}
+
+/* .top-major .liment; */
+
+.liment .legion {
+    box-shadow: 9px 5px 14px 5px #c1c1c19e;
+    border-radius: 8px;
+    width: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+}
+.liment .legion h3 {
+    font-weight: 500;
+}
+.liment .legion h2 {
+    text-align: right;
+}
+
+.liment button {
+    padding: 8px 32px;
+    background-color: aquamarine;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: capitalize;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+}
+
+td.count {
+    max-width: 20px;
+}
+
+tbody tr:hover {
+    cursor: pointer;
+    background-color: rgb(121, 255, 255);
+    transition: all .3s ease-in-out;
+}
+
+.fawn {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+select {
+    background-color: beige;
+    padding: 10px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+/* .flex > * {
+    width: ;
+} */

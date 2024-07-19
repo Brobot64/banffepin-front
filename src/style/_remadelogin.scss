@@ -1,0 +1,96 @@
+$inpbg: #FBFBFB;
+$btn-gray: #C1CED3;
+$pry-blue: #0097FF;
+
+.remadelogin {
+    display: flex;
+    flex-direction: column;
+    padding: 13px;
+    img {
+        margin: auto;
+        margin-bottom: 50px;
+    }
+
+    form {
+        display: inherit;
+        flex-direction: column;
+        gap: 35px;
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18.2px;
+        }
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            > input {
+                height: 19px;
+                padding: 8px;
+                font-size: 19px;
+            }
+        }
+        input {
+            outline: none;
+            border: none;
+            font-size: 12px;
+            line-height: 13.19px;
+            font-weight: 500;
+            background-color: $inpbg;
+        }
+
+        button {
+            width: 94%;
+            margin: auto;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 18.9px;
+            padding: 15px;
+            font-family: "Rubik", sans-serif;
+            letter-spacing: .7px;
+            border-radius: 8px;
+            background-color: $btn-gray;
+            &:hover{
+                background-color: $pry-blue;
+                transition: all .3s ease-in;
+            }
+        }
+    }
+}
+
+.inputplt {
+    display: flex;
+    background-color: $inpbg;
+    padding: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center;
+    height: fit-content;
+    gap: 10px;
+    div {
+        display: inherit;
+        height: fit-content;
+        align-items: center;
+        gap: 5px;
+        span {
+            height: fit-content;
+            font-size: 12px;
+            line-height: 13.19px;
+        }
+        img {
+            margin: 0;
+            width: 20px;
+            height: 14px;
+        }
+    }
+    input {
+        flex: 1;
+        padding: 0;
+        height: 19px;
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+}

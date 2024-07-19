@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Line</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+     <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+}
+
+#number-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+.line {
+    height: 4px;
+    width: 100%;
+    background-color: #ccc;
+    position: absolute;
+}
+
+.node {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.node.active {
+    background-color: #007BFF;
+}
+
+#selected-number {
+    font-size: 18px;
+}
+
+     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Line</h1>
+        <div id="number-line"></div>
+        <p id="selected-number"></p>
+    </div>
+    <!-- <script src="script.js"></script> -->
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const numberLine = document.getElementById('number-line');
+    const selectedNumberDisplay = document.getElementById('selected-number');
+
+    const min = 1;
+    const max = 10;
+    let selectedValue = null;
+
+    const handleClick = (event, value) => {
+        if (selectedValue !== null) {
+            document.getElementById(`node-${selectedValue}`).classList.remove('active');
+        }
+        selectedValue = value;
+        event.target.classList.add('active');
+        selectedNumberDisplay.textContent = `You selected: ${value}`;
+    };
+
+    const line = document.createElement('div');
+    line.classList.add('line');
+    numberLine.appendChild(line);
+
+    for (let i = min; i <= max; i++) {
+        const node = document.createElement('div');
+        node.classList.add('node');
+        node.id = `node-${i}`;
+        node.textContent = i;
+        node.addEventListener('click', (event) => handleClick(event, i));
+        numberLine.appendChild(node);
+    }
+});
+
+     </script>
+</body>
+</html>

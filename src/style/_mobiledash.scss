@@ -1,0 +1,372 @@
+$light-grey: #E8F0F1;
+$numlinlen: 16px;
+
+.mobiledash  {
+    position: relative;
+    svg {
+        position: absolute;
+        left: 10px;
+    }
+
+    h3 {
+        margin: auto;
+        width: fit-content;
+        margin-top: 20px;
+        font-size: 19px;
+        line-height: 21.92px;
+        text-transform: capitalize;
+    }
+    
+    .recenttransact {
+        background-color: #fff;
+        border-radius: 8px;
+        .top-action {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            text-transform: capitalize;
+            p {
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 15.63px;
+            }
+
+            a {
+                font-size: 11px;
+                line-height: 13.19px;
+                color: $pry-blue;
+            }
+        }
+        .history {
+            display: flex;
+            max-height: 260px;
+            overflow: hidden;
+            flex-direction: column;
+            gap: 10px;
+            color: #3A3A3A;
+            cursor: pointer;
+            padding-bottom: 20px;
+            .hist-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                .item-name {
+                   display: inherit;
+                   align-items: center;
+                   gap: 16px;
+                   img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                   }
+                   div {
+                    gap: 6px;
+                    text-transform: capitalize;
+                    font-weight: 400;
+                    h5 {
+                        font-size: 15px;
+                        line-height: 18.07px;
+                        font-weight: 400;
+                    }
+                    p {
+                        font-size: 11px;
+                        text-transform: capitalize;
+                        line-height: 13.19px;
+                    }
+                   }
+                }
+
+                > div {
+                  h4 {
+                    font-size: 16px;
+                    line-height: 19.07px;
+                    color: #6FB84C;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                    text-align: right;
+                  }
+
+                  &.airtel {
+                    h4 {
+                        color: #C8102E;
+                    }
+                  }
+                  &.glo {
+                    h4 {
+                        color: #139B08;
+                    }
+                  }
+                  &.mtn {
+                    h4 {
+                        color: #FFCB01;
+                    }
+                  }
+
+
+                  p {
+                    font-size: 11px;
+                    line-height: 13.19px;
+                    text-transform: capitalize;
+                    font-weight: 400;
+                  } 
+                }
+                
+                &:hover {
+                    background-color: #c1bfbf78;
+                    transition: .4s all ease-in;
+                }
+            }
+        }
+    }
+}
+
+.balancebadge {
+    background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
+    color: $light-grey;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 4px 0 #00000040;
+    max-width: 90%;
+    margin: 15px auto;
+    border-radius: 8px;
+    padding: 13px 10px;
+    p, a {
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: 9px;
+        line-height: 10.2px;
+        letter-spacing: .3px;
+        color: $light-grey;
+        text-decoration: none;
+    }
+}
+
+.telcogather {
+    position: relative;
+    .alltelco {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        max-width: 80%;
+        margin: auto;
+        justify-content: space-between;
+        gap: 20px 30px;
+        div {
+            display: inherit;
+            cursor: pointer;
+            gap: 3px;
+            padding: 9px 15px;
+            box-shadow: 0 4px 4px 0 #00000040;
+            border-radius: 8px;
+            align-items: center;
+            width: 77px;
+            max-width: 77px;
+            h6 {
+                font-size: 14px;
+                text-transform: capitalize;
+                font-weight: 400;
+                line-height: 16.41px;
+                white-space: nowrap;
+            }
+            &:hover {
+                background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
+                transition: all .3s ease-in;
+                color: white;
+            }
+        }
+    }
+    button {
+        width: fit-content;
+        display: flex;
+        font-size: 16px;
+        line-height: 19.07px;
+        font-weight: 500;
+        gap: 5px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 6px;
+        text-transform: capitalize;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+        svg {
+            position: static;
+            height: 19.07px;
+        }
+        &:hover {
+            transition: all .3s ease-in;
+            gap: 7px;
+        }
+    }
+}
+
+
+.number-line {
+    position: relative;
+    display: flex;
+    gap: $numlinlen;
+    .node {
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        border-radius: 50%;
+        border: 1px solid rgb(95, 94, 94);
+        background-color: white;
+        cursor: pointer;
+        .inner {
+            border-radius: 50%;
+            width: calc($numlinlen - 5px);
+            height: calc($numlinlen - 5px);
+            margin: 2px;
+        }
+        p {
+            font-size: 10px;
+            position: absolute;
+            top: calc($numlinlen + 2.5px);
+            left: calc(($numlinlen - 17px) / 2);
+        }
+        &.active, &:hover {
+            border-color: #0079CC;
+            .inner {
+                background-color: #0097FF;
+                transition: all .3s ease-in-out;
+            }
+        }
+    }
+    > .node:not(:last-child) span.line {
+        position: absolute;
+        right: -$numlinlen;
+        height: 1px;
+        width: $numlinlen;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: black;
+    } 
+}
+
+.denomselect {
+    background-color: #0099ff40;
+    padding: 15px;
+    padding-bottom: 20px;
+    h6, p{
+        font-size: 11px;
+        line-height: 12.72px;
+        font-weight: 400;
+        color: #0C0D0D;
+        text-transform: capitalize;
+    }
+    h6 {
+        width: fit-content;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+    .number-line {
+        width: fit-content;
+        margin: auto;
+    }
+}
+
+.overallselect {
+    display: flex;
+    flex-direction: column;
+    button {
+        background-color: #C1CED3;
+        border-radius: 7px;
+        width: fit-content;
+        padding: 7px 60px;
+        letter-spacing: .5px;
+        font-size: 13px;
+        line-height: 15.06px;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: #FFF;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin: 16px auto;
+        &:hover {
+            background-color: #0097FF;
+            transition: all .3s ease-in-out;
+        }
+    }
+    .quantitydetl {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        p {
+            font-weight: 400;
+            text-transform: capitalize;
+            font-size: 10px;
+            line-height: 12.2px;
+            margin: auto;
+            margin-top: 20px;
+            letter-spacing: .5px;
+        }
+        .inputslide {
+            margin: auto;
+            display: inherit;
+            gap: 0;
+            background-color: #fff;
+            border-radius: 11.5px;
+            padding: 3px;
+            border: 1px solid #c0c0c0;
+            button {
+                background-color: transparent;
+                color: black;
+                padding: 3px;
+                margin: 0;
+                font-weight: 600;
+                font-size: 15px;
+                &:hover {
+                    background-color: #92bfde;
+                }
+            }
+            input {
+                font-size: 12px;
+                line-height: 13.72px;
+                font-weight: 600;
+                text-align: center;
+                color: black;
+                width: 40px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+
+.othertelco {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+    h4 {
+        margin: 20px;
+    }
+    div {
+        display: inherit;
+        cursor: pointer;
+        gap: 10px;
+        padding: 9px 15px;
+        box-shadow: 0 4px 4px 0 #00000040;
+        border-radius: 8px;
+        align-items: center;
+        h6 {
+            font-size: 14px;
+            text-transform: capitalize;
+            font-weight: 400;
+            line-height: 16.41px;
+            white-space: nowrap;
+        }
+        &:hover {
+            background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
+            transition: all .3s ease-in;
+            color: white;
+        }
+    }
+}
+
+
