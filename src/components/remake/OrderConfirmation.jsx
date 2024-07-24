@@ -55,6 +55,10 @@ const OrderConfirmation = () => {
         }
     }
 
+
+    // ce99441f-0b22-4a52-a002-950005e6bd94 
+
+
     return (
         <React.Fragment>
             {loading && <Loader />}
@@ -87,7 +91,7 @@ const OrderConfirmation = () => {
                     </div>
 
                     <div>
-                        <p>Denomination used</p>
+                        <p>Balance After purchase</p>
                         <p>&#8358;{orders ? orders.denomination : '0'}</p>
                     </div>
                 </div>
@@ -96,7 +100,13 @@ const OrderConfirmation = () => {
                     <label htmlFor="">
                         Details of purchase
                     </label> <br />
-                    <textarea name="" id=""></textarea>
+                    {/* <textarea name="" id=""></textarea> */}
+                    <div>
+                        <h5>{orders ? orders.name : 'null'}</h5>
+
+                        <p>&#8358;{orders ? orders.denomination : '0'}&nbsp;&nbsp;x&nbsp;&nbsp;{orders ? orders.volume : 'null'}</p>
+                        <p>Total: {orders ? debitAmount().toLocaleString() : 'null'}</p>
+                    </div>
                 </div>
 
                 <div className="totalsum">

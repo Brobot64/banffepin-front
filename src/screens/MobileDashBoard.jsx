@@ -16,7 +16,7 @@ const MobileDashBoard = () => {
     const tkn = localStorage.getItem('token');
     const user = JSON.parse(sessionStorage.getItem('user'));
     if (user) setUser(user);
-    if (!tkn) Navigate('/');
+    if (!tkn || !user) Navigate('/');
   }, []);
 
   return (

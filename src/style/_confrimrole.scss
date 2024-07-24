@@ -1,0 +1,154 @@
+
+
+.firms {
+    width: 100%;
+    max-width: inherit;
+    position: fixed;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    top: 0;
+    height: inherit;
+    max-height: inherit;
+    background: rgba(226, 222, 222, 0.1);
+    // background-color: yellow;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.glass-confirm {
+    box-sizing: border-box;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 70%;
+    min-height: 350px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px 10px 0 0;
+    h3 {
+        font-weight: 600;
+        font-style: italic;
+        font-size: 18px;
+        line-height: 21.72px;
+        letter-spacing: 0.5px;
+        width: fit-content;
+        margin: 10px auto;
+    }
+
+    svg {
+        position: absolute;
+        right: 20px;
+        top: 21.5px;
+        cursor: pointer;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20.72px;
+        letter-spacing: .3px;
+    }
+
+    h5 {
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 20.72px;
+        letter-spacing: .3px;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    table {
+        th {
+            text-align: left;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 15.85px;
+            letter-spacing: .2px;
+        }
+        th:nth-child(even) {
+            text-align: right;
+        }
+
+        tr {
+            &:hover {
+                background: none;
+            }
+            td {
+                padding-left: 20px;
+                font-size: 14px;
+                line-height: 17.07px;
+                letter-spacing: .2px;
+                font-weight: 400;
+            }
+            td:nth-child(even) {
+                text-align: right;
+                width: fit-content;
+                padding-right: 20px;
+            }
+        }
+    }
+
+    .totals {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 15px;
+        box-sizing: border-box;
+        border: 2px solid #00000040;
+        border-left: none;
+        border-right: none;
+        > div {
+            display: inherit;
+            flex-direction: column;
+            p {
+                text-align: center;
+                font-size: 11px;
+                line-height: 13.41px;
+                letter-spacing: .2px;
+            }
+        }
+    }
+
+    button {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 21.5px;
+        letter-spacing: .4px; 
+        color: white;
+        text-transform: capitalize;
+        width: fit-content;
+        padding: 7px 36px;
+        border-radius: 24.5px;
+        margin: auto;
+        border: none;
+        background-color: #0097ff;
+        cursor: pointer;
+        &:hover, &.cancel:hover {
+            background-color: #48b4fde9;
+            transition: all .3s ease-in-out;
+        }
+        &.cancel {
+            background-color: transparent;
+            color: #00000099;
+        }
+    }
+}
+
+
+
+
+// /* From https://css.glass */
+// background: rgba(226, 222, 222, 0.17);
+// border-radius: 16px;
+// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+// backdrop-filter: blur(3.6px);
+// -webkit-backdrop-filter: blur(3.6px);

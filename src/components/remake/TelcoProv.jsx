@@ -13,7 +13,7 @@ export function abbreviateNumber(num) {
   return num.toString();
 }
 
-const TelcoProv = ({ telname = 'MTN', handleLoader }) => {
+const TelcoProv = ({ telname = 'MTN', handleLoader, handlepop }) => {
     const navigate = useNavigate();
     const [activeNode, setActiveNode] = useState(null);
     const [telcos, setTelcos] = useState([]);
@@ -25,17 +25,18 @@ const TelcoProv = ({ telname = 'MTN', handleLoader }) => {
     };
 
     const handleClick = () => {
+      handleLoader(true);
       const order = {
         name: telname,
         denomination: activeNode,
         volume: quantity
       }
-      handleLoader();
       localStorage.setItem('order', JSON.stringify(order));
       setTimeout(() => {
-        handleLoader();
-        navigate('/mobile/confirmorder');
-      }, 3000);
+        handleLoader(false);
+        handlepop();
+        // navigate('/mobile/confirmorder');
+      }, 5000);
     };
 
     const handleInputChange = (event) => {
@@ -66,14 +67,15 @@ const TelcoProv = ({ telname = 'MTN', handleLoader }) => {
                 console.error(error);
             }
         };
-
+        setActiveNode(null);
+        setQuantity(1)
         fetchTelcos();
     }, [telname]);
 
     return (
         <div className='overallselect'>
             <div className="denomselect">
-                <h6>Select Denomination</h6>
+                <h6>Select Denomination ({telname.toUpperCase()})</h6>
                 <div className="number-line">
                     {denominations.map((denomination, i) => (
                         <div
@@ -91,7 +93,7 @@ const TelcoProv = ({ telname = 'MTN', handleLoader }) => {
 
                 {activeNode && (
                     <div className="quantitydetl">
-                        <p>Purchase Quantity (N1000)</p>
+                        <p>Purchase Quantity ({telname})</p>
                         <div className="inputslide">
                             <button onClick={handleDecrement}>-</button>
                             <input

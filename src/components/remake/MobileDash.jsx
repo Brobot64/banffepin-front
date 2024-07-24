@@ -5,19 +5,23 @@ import TelcoProv from './TelcoProv'
 import Modal from '../Modal'
 import OtherTelco from './OtherTelco'
 import Loader from './Loader'
+import ConfirmTale from './ConfirmTale'
 
 const MobileDash = () => {
     const [selector, setSelector] = React.useState(false);
     const [openModal, setOpenModal] = React.useState(false);
     const [telco, setTelco] = React.useState();
     const [loader, setLoader] = React.useState(false);
+    const [confirm, setConfirm] = React.useState(false);
+
+    const onConfirm = () => setConfirm(!confirm);
 
     const handleTelco = (name) => {
         setTelco(name.toLowerCase());
         setSelector(true);
     }
 
-    const handleLoader = () => setLoader(!loader);
+    const handleLoader = (sets) => setLoader(sets);
 
     const handleSelector = (e) => {
         setSelector(true);
@@ -46,19 +50,19 @@ const MobileDash = () => {
 
             <div className="telcogather">
                 <div className='alltelco'>
-                    <div className="telco" onClick={() => handleTelco('Aitrile')}>
+                    <div className={`telco ${telco && telco.toLowerCase() === 'airtel' && 'active'}`} onClick={() => handleTelco('airtel')}>
                         <img src="/airtel.png" alt="banffpay telco" />
                         <h6>airtel</h6>
                     </div>
-                    <div className="telco" onClick={() => handleTelco('glo')}>
+                    <div className={`telco ${telco && telco.toLowerCase() === 'glo' && 'active'}`} onClick={() => handleTelco('glo')}>
                         <img src="/glo.png" alt="banffpay telco" />
                         <h6>glo</h6>
                     </div>
-                    <div className="telco" onClick={() => handleTelco('MTN')}>
+                    <div className={`telco ${telco && telco.toLowerCase() === 'mtn' && 'active'}`} onClick={() => handleTelco('MTN')}>
                         <img src="/mtn.png" alt="banffpay telco" />
                         <h6>MTN</h6>
                     </div>
-                    <div className="telco" onClick={() => handleTelco('9mobile')}>
+                    <div className={`telco ${telco && telco.toLowerCase() === '9mobile' && 'active'}`} onClick={() => handleTelco('9mobile')}>
                         <img src="/9mobile.png" alt="banffpay telco" />
                         <h6>9 Mobile</h6>
                     </div>
@@ -70,7 +74,7 @@ const MobileDash = () => {
                 </button>
             </div>  
 
-            {selector && <TelcoProv telname={telco} handleLoader={handleLoader}/>}
+            {selector && <TelcoProv telname={telco} handleLoader={handleLoader} handlepop={onConfirm}/>}
 
             <div className="recenttransact">
                 <div className="top-action">
@@ -86,6 +90,7 @@ const MobileDash = () => {
                 </div>
             </div>
         </div>
+        {confirm && <ConfirmTale isopen={confirm} onclose={onConfirm}/>}
     </React.Fragment>
   )
 }

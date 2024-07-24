@@ -1,0 +1,68 @@
+
+.epin-print {
+    max-width: 600px;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .top {
+        h2 {
+            width: fit-content;
+            margin: 10px auto;
+            text-transform: capitalize;
+            font-size: 25px;
+            line-height: 35px;
+            font-weight: 500;
+        }
+        div {
+            display: flex;
+            padding: 0 15px;
+            font-size: 14px;
+            line-height: 18px;
+            justify-content: space-between;
+            margin: 5px 0;
+            p {
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .peasy {
+        max-height: 520px;
+        overflow-y: auto;
+        &.hide {
+            display: none;
+        }
+        ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 70px;
+            padding: 30px;
+            justify-content: center;
+        }
+    }
+
+    .buto {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    button {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 9px 20px;
+        border-radius: 20px;
+        border: none;
+        text-transform: capitalize;
+        background-color: #5fbfff;
+        color: #f4f4fc;
+        cursor: pointer;
+        &:hover {
+            background-color: #89cffe;
+            transition: all .2s ease-in-out;
+        }
+    }
+}
+
+

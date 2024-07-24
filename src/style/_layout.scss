@@ -2,6 +2,7 @@ $bg-color: #3c3c3c;
 
 
 .mobile-layout {
+    position: relative;
     box-sizing: border-box;
     padding: 15px 0;
     width: 100%;
@@ -15,6 +16,7 @@ $bg-color: #3c3c3c;
 }
 
 .inner-component {
+    // position: relative;
     // background-color: #fff;
     background-color: #f4f4f4;
     border-radius: 8px;
@@ -22,6 +24,34 @@ $bg-color: #3c3c3c;
     max-width: 400px;
     height: 100%;
     overflow: hidden;
+}
+
+.contact-us {
+    position: absolute;
+    bottom: 20px;
+    text-transform: capitalize;
+    background-color: #0097ff;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #f4f4f4;
+    text-decoration: none;
+    &:hover {
+        background-color: #3db0fd;
+        color: #f4f4f6;
+        transition: .2s all ease-in-out;
+    }
+    a {
+        height: 20px;
+        width: 20px;
+    }
+    i {
+        width: 17px;
+        height: 17px;
+    }
 }
 
 

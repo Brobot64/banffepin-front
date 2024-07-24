@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Dashboard from './screens/Dashboard';
 import LoginRemake from './screens/LoginRemake';
 import MobileDashBoard from './screens/MobileDashBoard';
-import ReceiptTemplate from './components/remake/ReactPdf';
+import { SecTemp } from './components/remake/ReactPdf';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           
         <Route element={<LoginRemake/>} path='/'/>
           <Route element={<Login/>} path='/login'/>
-          <Route element={<ReceiptTemplate/>} path='/temp'/>
+          <Route element={<SecTemp/>} path='/temp'/>
           <Route element={<Dashboard/>} path='/dashboard/*'/>
           <Route element={<MobileDashBoard/>} path='/mobile/*'/>
         </Routes>

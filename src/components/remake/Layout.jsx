@@ -8,6 +8,9 @@ const Layout = ({ children }) => {
             <div className="inner-component">
                 { children }
             </div>
+            <a href='https://google.com' target='_blank' className="contact-us" title='chat admin'>
+              <i className="fa-regular fa-comment-dots"></i>
+            </a>
         </div>
     </React.Fragment>
   )

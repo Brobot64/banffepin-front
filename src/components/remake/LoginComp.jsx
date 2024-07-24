@@ -21,8 +21,11 @@ const LoginComp = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (token) {
+        const user = sessionStorage.getItem('user')
+        if (token && user) {
           navigate('/mobile/');
+        } else {
+            navigate('/')
         }
     }, [navigate]);
 

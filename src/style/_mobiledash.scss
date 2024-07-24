@@ -173,6 +173,10 @@ $numlinlen: 16px;
                 transition: all .3s ease-in;
                 color: white;
             }
+            &.active {
+                background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
+                color: #f4f5f4;
+            }
         }
     }
     button {
@@ -288,6 +292,10 @@ $numlinlen: 16px;
         &:hover {
             background-color: #0097FF;
             transition: all .3s ease-in-out;
+        }
+        &:disabled {
+            background-color: #999999;
+            color: #7f7f7f;
         }
     }
     .quantitydetl {

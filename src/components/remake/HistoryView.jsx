@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HistoryView = ({ data }) => {
     const navigate = useNavigate();
-    const { name, denomination, quantity, date, time } = data || {};
+    const { name, denomination, quantity, date, time, id = '688bhbvEyy8' } = data || {};
     const amount = denomination && quantity ? parseInt(denomination) * parseInt(quantity) : 0;
 
     const handleReturn = () => {
@@ -39,7 +39,7 @@ const HistoryView = ({ data }) => {
 
                     <div style={{ justifyContent: 'space-between', fontSize: '12px', color: 'gray' }}>
                         <p>OrderId:</p>
-                        <p>688bhbvEyy8</p>
+                        <p>{id}</p>
                     </div>
                 </div>
 
