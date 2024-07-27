@@ -344,6 +344,35 @@ $numlinlen: 16px;
     }
 }
 
+// Revamped Telco Denomination Selector
+
+.denomselect {
+    .revampdenom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 20px;
+        width: 100%;
+    }
+    button.timy {
+        width: fit-content;
+        padding: 7px 15px;
+        border: 1px #C1CED3 solid;
+        font-weight: 300;
+        background-color: #0097FF;
+        width: 70px;
+        margin: 0;
+        &.active {
+            background-color: #0276c4;
+        }
+        &:disabled {
+            background-color: #a3d8fce2;
+        }
+    }
+}
+
+// Ended
+
 
 .othertelco {
     display: flex;
@@ -369,11 +398,27 @@ $numlinlen: 16px;
             line-height: 16.41px;
             white-space: nowrap;
         }
-        &:hover {
+        &:hover , &.active {
             background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
             transition: all .3s ease-in;
             color: white;
         }
+    }
+
+    .badgeR {
+        width: 30px;
+        height: 30px;
+        max-width: 30px;
+        max-height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        text-transform: capitalize;
+        padding: 0;
+        display: flex;
+        font-weight: 600;
+        color: #21005D;
+        justify-content: center;
+        align-items: center;
     }
 }
 

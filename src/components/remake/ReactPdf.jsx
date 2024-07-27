@@ -113,7 +113,7 @@ export const SecTemp = ({assignments}) => {
   `;
     try {
       const response = await axios.post(
-        'http://localhost:5050/genpdf',
+        `${process.env.BASE_URL}/genpdf`,
         { content: htmlContent },
         {
           responseType: 'blob', // Important

@@ -6,6 +6,7 @@ import Modal from '../Modal'
 import OtherTelco from './OtherTelco'
 import Loader from './Loader'
 import ConfirmTale from './ConfirmTale'
+import TelcoProvReImage from './TelcoProvReImage'
 
 const MobileDash = () => {
     const [selector, setSelector] = React.useState(false);
@@ -21,6 +22,12 @@ const MobileDash = () => {
         setSelector(true);
     }
 
+    const handleModalTelco = (name) => {
+        setTelco(name.toLowerCase());
+        setSelector(true);
+        setOpenModal(false);
+    }
+
     const handleLoader = (sets) => setLoader(sets);
 
     const handleSelector = (e) => {
@@ -34,7 +41,7 @@ const MobileDash = () => {
   return (
     <React.Fragment>
         {loader && <Loader/>}
-        <Modal isOpen={openModal} onClose={handleModal} children={<OtherTelco/>}/>
+        <Modal isOpen={openModal} onClose={handleModal} children={<OtherTelco telco={telco} handleTelcoChange={handleModalTelco}/>}/>
         <div className="mobiledash">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
                 <path d="M0.292895 7.43547C-0.0976295 7.826 -0.0976295 8.45916 0.292895 8.84968L6.65686 15.2136C7.04738 15.6042 7.68055 15.6042 8.07107 15.2136C8.46159 14.8231 8.46159 14.19 8.07107 13.7994L2.41422 8.14258L8.07107 2.48572C8.46159 2.0952 8.46159 1.46203 8.07107 1.07151C7.68055 0.680986 7.04738 0.680986 6.65686 1.07151L0.292895 7.43547ZM15 7.14258L1 7.14258V9.14258L15 9.14258V7.14258Z" fill="#0097FF"/>
@@ -74,7 +81,7 @@ const MobileDash = () => {
                 </button>
             </div>  
 
-            {selector && <TelcoProv telname={telco} handleLoader={handleLoader} handlepop={onConfirm}/>}
+            {selector && <TelcoProvReImage telname={telco} handleLoader={handleLoader} handlepop={onConfirm}/>}
 
             <div className="recenttransact">
                 <div className="top-action">

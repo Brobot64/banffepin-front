@@ -144,6 +144,19 @@
     }
 }
 
+.hist-selector {
+    box-sizing: border-box;
+    padding: 5px;
+    display: flex;
+    gap: 10px;
+    select {
+        text-transform: capitalize;
+        flex: 1;
+        font-family: "Rubik", sans-serif;
+        cursor: pointer;
+    }
+}
+
 .fullhistory {
     position: relative;
     svg {
@@ -161,5 +174,40 @@
     .history {
         max-height: 600px;
         overflow-y: auto;
+    }
+}
+
+
+.customDate {
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        label {
+            font-size: 14px;
+            line-height: 20px;
+        }
+        input {
+            font-family: "Rubik", sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            cursor: pointer;
+        }
+    }
+
+    button {
+        background-color: #0097ff;
+        color: white;
+        font-weight: 550;
+        font-size: 17px;
+        line-height: 23px;
+        padding: 7px 25px;
+        border: none;
+        cursor: pointer;
+        border-radius: calc((23px + 14px) / 2);
+        letter-spacing: .2px;
+        &:hover {
+            background-color: #40adf6;
+        }
     }
 }

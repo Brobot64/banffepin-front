@@ -6,6 +6,7 @@ import Dashboard from './screens/Dashboard';
 import LoginRemake from './screens/LoginRemake';
 import MobileDashBoard from './screens/MobileDashBoard';
 import { SecTemp } from './components/remake/ReactPdf';
+// import { configDotenv } from 'dotenv';
 
 function App() {
   return (

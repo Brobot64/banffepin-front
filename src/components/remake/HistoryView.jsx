@@ -1,6 +1,33 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
+export function formatDateTime(dateTimeString) {
+    // Parse the date-time string
+    const date = new Date(dateTimeString);
+  
+    // Format the date
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options).replace(/,/g, '');
+  
+    // Get the hours, minutes, and AM/PM
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes}${ampm}`;
+  
+    // Combine the formatted date and time
+    return { date: formattedDate, time: formattedTime };
+    // return `${formattedDate}\n${formattedTime}`;
+}
+  
+  // Example usage
+//   const dateTimeString = "2024-07-22T16:19:42.093Z";
+//   console.log(formatDateTime(dateTimeString));
+  
+
 const HistoryView = ({ data }) => {
     const navigate = useNavigate();
     const { name, denomination, quantity, date, time, id = '688bhbvEyy8' } = data || {};

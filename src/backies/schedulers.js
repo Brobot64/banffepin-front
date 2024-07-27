@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = 'http://localhost:5050'
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
 export const getAllSchedules = async () => {
@@ -216,21 +216,50 @@ export const createUser = async (usertype, data) => {
     }
 };
 
-export const getUserOrders = async (user) => {
-    try {
-        const response = await axios.get(`${baseUrl}/pin/vend/${user}`);
+// export const getUserOrders = async (user) => {
+//     try {
+//         const response = await axios.get(`${baseUrl}/pin/vend/${user}`);
 
-        return {
-            data: response.data,
-            status: response.status
-        }
-    } catch (error) {
-        return {
-            data: error.response ? error.response.data : 'Network Error',
-            status: error.response ? error.response.status : 500
-        };
-    }
+//         return {
+//             data: response.data,
+//             status: response.status
+//         }
+//     } catch (error) {
+//         return {
+//             data: error.response ? error.response.data : 'Network Error',
+//             status: error.response ? error.response.status : 500
+//         };
+//     }
+// };
+
+export const getUserOrders = async (user, query = {}, dateOption = '', customStartDate, customEndDate, page = 1, limit = 10, sortOrder = 'asc') => {
+  try {
+    const queryParams = new URLSearchParams({
+      query: JSON.stringify(query),
+      dateOption,
+      customStartDate: customStartDate ? customStartDate : '',
+      customEndDate: customEndDate ? customEndDate : '',
+    //   customStartDate: customStartDate ? customStartDate.toISOString() : '',
+    //   customEndDate: customEndDate ? customEndDate.toISOString() : '',
+      page: page.toString(),
+      limit: limit.toString(),
+      sortOrder
+    });
+
+    const response = await axios.get(`${baseUrl}/pin/vend/${user}?${queryParams.toString()}`);
+
+    return {
+      data: response.data,
+      status: response.status
+    };
+  } catch (error) {
+    return {
+      data: error.response ? error.response.data : 'Network Error',
+      status: error.response ? error.response.status : 500
+    };
+  }
 };
+
 
 export const createUserOrders = async (user, cart) => {
     try {

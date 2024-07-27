@@ -25,6 +25,46 @@ export const telcoUser = [
     }
 ]
 
+export function getFirstLetter(str) {
+  return str.charAt(0);
+}
+
+// export function getRandomText(textArray) {
+//   // If the array is empty or has only one element, return it directly
+//   if (textArray.length <= 1) {
+//     return textArray[0];
+//   }
+
+//   // Initialize previousText to avoid consecutive repetition
+//   let previousText = null;
+
+//   return function() {
+//     let randomIndex;
+//     let randomText;
+
+//     do {
+//       randomIndex = Math.floor(Math.random() * textArray.length);
+//       randomText = textArray[randomIndex];
+//     } while (randomText === previousText);
+
+//     previousText = randomText;
+//     return randomText;
+//   };
+// }
+
+export function getRandomText(array) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+
+export const colorArray = ['FFE9D0', 'E9FF97', 'FFD18E', 'FFFED3', 'D8EFD3', 'FFEEA9', 'E7D4B5', '95D2B3']
+
+export const denomArray = ['100', '200', '1000', '500'];
+
+export const allOtherTelcos = [
+  'ipnx', 'spectranet', 'starcom', 'ntel', 'starlink', 'verizon'
+]
+
 export const tonfa = {
     "companyName": "Your Company",
     "address": "123 Main Street",
