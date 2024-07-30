@@ -19,6 +19,9 @@ const LoginComp = () => {
         });
     };
 
+    const isFormValid = inputs.phone.trim() !== ''; //&& inputs.password.trim() !== '';
+    // console.log("valiform: ", isFormValid)
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         const user = sessionStorage.getItem('user')
@@ -94,7 +97,7 @@ const LoginComp = () => {
                             required
                         />
                     </div>
-                    <button disable={inputs} type='submit'>Login</button>
+                    <button disabled={!isFormValid} type='submit'>Login</button>
                 </form>
             </div>
         </React.Fragment>
