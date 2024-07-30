@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { telcoUser } from '../../minst'
 import HistItem from './HistItem'
 import TelcoProv from './TelcoProv'
@@ -7,11 +7,17 @@ import OtherTelco from './OtherTelco'
 import Loader from './Loader'
 import ConfirmTale from './ConfirmTale'
 import TelcoProvReImage from './TelcoProvReImage'
+import { getReminder } from '../../backies/schedulers'
 
 const MobileDash = () => {
     const [selector, setSelector] = React.useState(false);
     const [openModal, setOpenModal] = React.useState(false);
     const [telco, setTelco] = React.useState();
+
+    const [telcos, setTelcos] = useState([]);
+    const [denominations, setDenominations] = useState([]);
+    const [ristDenominations, setRistDenominations] = useState([]);
+
     const [loader, setLoader] = React.useState(false);
     const [confirm, setConfirm] = React.useState(false);
 
@@ -35,6 +41,31 @@ const MobileDash = () => {
     };
 
     const handleModal = () => setOpenModal(!openModal);
+
+    React.useEffect(() => {
+        const fetchTelcos = async () => {
+            try {
+                const response = await getReminder(); // Adjust the endpoint if necessary
+                const fetchedTelcos = response.data.data;
+                setTelcos(fetchedTelcos);
+
+                const selectedTelco = fetchedTelcos.find(t => t.telco.toLowerCase() === telco);
+                setDenominations(selectedTelco ? selectedTelco.denominations : []);
+                // setRistDenominations(mergeArraysWithoutDuplicates(denomArray, denominations));
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchTelcos()
+    }, [])
+
+
+    React.useEffect(() => {
+        const selectedTelco = telcos.find(t => t.telco.toLowerCase() === telco);
+        setDenominations(selectedTelco ? selectedTelco.denominations : []);
+        // setRistDenominations(mergeArraysWithoutDuplicates(denomArray, denominations));
+    }, [telco])
 
 
 
@@ -81,7 +112,7 @@ const MobileDash = () => {
                 </button>
             </div>  
 
-            {selector && <TelcoProvReImage telname={telco} handleLoader={handleLoader} handlepop={onConfirm}/>}
+            {selector && <TelcoProvReImage telname={telco} handleLoader={handleLoader} handlepop={onConfirm} denoms={telcos}/>}
 
             <div className="recenttransact">
                 <div className="top-action">

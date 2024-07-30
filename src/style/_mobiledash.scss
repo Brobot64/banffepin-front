@@ -275,7 +275,7 @@ $numlinlen: 16px;
     display: flex;
     flex-direction: column;
     button {
-        background-color: #C1CED3;
+        background-color: #0097FF;
         border-radius: 7px;
         width: fit-content;
         padding: 7px 60px;
@@ -290,7 +290,7 @@ $numlinlen: 16px;
         cursor: pointer;
         margin: 16px auto;
         &:hover {
-            background-color: #0097FF;
+            background-color: #50b3f5;
             transition: all .3s ease-in-out;
         }
         &:disabled {
@@ -322,17 +322,17 @@ $numlinlen: 16px;
             button {
                 background-color: transparent;
                 color: black;
-                padding: 3px;
+                padding: 5px;
                 margin: 0;
                 font-weight: 600;
-                font-size: 15px;
+                font-size: 18px;
                 &:hover {
                     background-color: #92bfde;
                 }
             }
             input {
-                font-size: 12px;
-                line-height: 13.72px;
+                font-size: 15px;
+                line-height: 17.72px;
                 font-weight: 600;
                 text-align: center;
                 color: black;
@@ -366,7 +366,7 @@ $numlinlen: 16px;
             background-color: #0276c4;
         }
         &:disabled {
-            background-color: #a3d8fce2;
+            background-color: #0097FF33;
         }
     }
 }

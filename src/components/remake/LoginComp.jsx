@@ -94,7 +94,7 @@ const LoginComp = () => {
                             required
                         />
                     </div>
-                    <button type='submit'>Login</button>
+                    <button disable={inputs} type='submit'>Login</button>
                 </form>
             </div>
         </React.Fragment>

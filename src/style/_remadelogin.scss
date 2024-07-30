@@ -51,7 +51,10 @@ $pry-blue: #0097FF;
             font-family: "Rubik", sans-serif;
             letter-spacing: .7px;
             border-radius: 8px;
-            background-color: $btn-gray;
+            background-color: $pry-blue;
+            &:disabled {
+                background-color: $btn-gray;
+            }
             &:hover{
                 background-color: $pry-blue;
                 transition: all .3s ease-in;

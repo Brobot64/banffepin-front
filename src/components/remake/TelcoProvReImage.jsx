@@ -7,6 +7,20 @@ export function mergeArraysWithoutDuplicates(...arrays) {
     return [...new Set(arrays.flat())];
 }
 
+function concatAndSortArrays(arr1, arr2) {
+    // Create a new set to store unique items
+    let resultSet = new Set(arr2);
+    
+    // Add items from the first array until the set has 8 items
+    for (let item of arr1) {
+        if (resultSet.size >= 8) break;
+        resultSet.add(item);
+    }
+    
+    // Convert the set back to an array and sort it
+    return Array.from(resultSet).sort((a, b) => parseInt(a) - parseInt(b));
+}
+
 export function isValueInArray(array, value) {
     return array.includes(value);
 }
@@ -22,7 +36,7 @@ export function abbreviateNumber(num) {
   return num.toString();
 }
 
-const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop }) => {
+const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) => {
     const navigate = useNavigate();
     const [activeNode, setActiveNode] = useState(null);
     const [telcos, setTelcos] = useState([]);
@@ -67,13 +81,13 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop }) => {
     useEffect(() => {
         const fetchTelcos = async () => {
             try {
-                const response = await getReminder(); // Adjust the endpoint if necessary
-                const fetchedTelcos = response.data.data;
-                setTelcos(fetchedTelcos);
+                // const response = await getReminder(); // Adjust the endpoint if necessary
+                // const fetchedTelcos = response.data.data;
+                // setTelcos(fetchedTelcos);
 
-                const selectedTelco = fetchedTelcos.find(t => t.telco.toLowerCase() === telname);
+                const selectedTelco = denoms.find(t => t.telco.toLowerCase() === telname);
                 setDenominations(selectedTelco ? selectedTelco.denominations : []);
-                setRistDenominations(mergeArraysWithoutDuplicates(denomArray, denominations));
+                setRistDenominations(concatAndSortArrays(denomArray, selectedTelco.denominations));
             } catch (error) {
                 console.error(error);
             }
@@ -91,7 +105,7 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop }) => {
                 <div className="revampdenom">
                     {
                         ristDenominations.map((denomination, i) => (
-                            <button disabled={isValueInArray(denominations, denomination)} className={`timy node ${activeNode === denomination ? 'active' : ''}`} onClick={() => handleSelectDenomination(denomination)} >
+                            <button disabled={!isValueInArray(denominations, denomination)} className={`timy node ${activeNode === denomination ? 'active' : ''}`} onClick={() => handleSelectDenomination(denomination)} >
                                 {denomination}
                             </button>
                         ))
