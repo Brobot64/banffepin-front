@@ -7,12 +7,17 @@ import OtherTelco from './OtherTelco'
 import Loader from './Loader'
 import ConfirmTale from './ConfirmTale'
 import TelcoProvReImage from './TelcoProvReImage'
-import { getReminder } from '../../backies/schedulers'
+import { getReminder, getUserBalances, getUserOrders } from '../../backies/schedulers'
+import { formatDateTime } from './HistoryView';
 
 const MobileDash = () => {
     const [selector, setSelector] = React.useState(false);
     const [openModal, setOpenModal] = React.useState(false);
     const [telco, setTelco] = React.useState();
+
+    const [balance, setUserBalance] = React.useState(0);
+
+    const [historyDat, setHistoryData] = React.useState([]);
 
     const [telcos, setTelcos] = useState([]);
     const [denominations, setDenominations] = useState([]);
@@ -67,6 +72,49 @@ const MobileDash = () => {
         // setRistDenominations(mergeArraysWithoutDuplicates(denomArray, denominations));
     }, [telco])
 
+    React.useEffect(() => {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        const userId = user ? user.id : null;
+        const fetchOrders= async () => {
+            try {
+                const response = await getUserOrders(userId, {}, '', undefined, undefined, 1, 4);
+                if (response.status === 200 || response.status === 201) setHistoryData(response.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        const fetchBalance = async () => {
+            console.log("called balances")
+            try {
+                const response = await getUserBalances(userId);
+                if (response.status === 200 || response.status === 201) setUserBalance(response.data.balance)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fetchBalance();
+        fetchOrders();
+    }, []);
+
+
+    // React.useEffect(() => {
+    //     const user = JSON.parse(sessionStorage.getItem('user'));
+    //     const userId = user ? user.id : null;
+
+    //     const fetchBalance = async () => {
+    //         try {
+    //             const response = await getUserBalances(userId);
+    //             if (response.status === 200 || response.status === 201) setUserBalance(response.data.balance)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+
+    //     fetchBalance();
+    // }, [])
+
 
 
   return (
@@ -82,8 +130,8 @@ const MobileDash = () => {
 
             <div className="balancebadge">
                 <p>available balance</p>
-                <h2>&#8358;&nbsp;15,000</h2>
-                <a href="">schedule transactions&nbsp;&gt;</a>
+                <h2>&#8358;&nbsp;{balance}</h2>
+                {/* <a href="">schedule transactions&nbsp;&gt;</a> */}
             </div>
 
             <div className="telcogather">
@@ -120,15 +168,24 @@ const MobileDash = () => {
                     <a href="/mobile/history">View all</a>
                 </div>
                 <div className="history">
-                    {
-                        telcoUser.map((item, index) => (
-                            <HistItem data={item} key={index}/>
+                {
+                    historyDat  && historyDat.length > 0 ? (
+                        historyDat.map((item, index) => (
+                            <HistItem key={index} data={{name: item.cart[0].telco, denomination: item.cart[0].denomination, quantity: item.cart[0].quantity, date: formatDateTime(item.createdAt.toString()).date, time: formatDateTime(item.createdAt.toString()).time}}/>
                         ))
-                    }
+
+                        // onClick={() => handleClick({name: item.cart[0].telco, denomination: item.cart[0].denomination, quantity: item.cart[0].quantity, date: formatDateTime(item.createdAt.toString()).date, time: formatDateTime(item.createdAt.toString()).time, id: item._id})}
+                    ) 
+                    : (
+                        <div style={{ textAlign: "center", padding: '30px' }}>
+                            No Data Found
+                        </div>
+                    )
+                }
                 </div>
             </div>
         </div>
-        {confirm && <ConfirmTale isopen={confirm} onclose={onConfirm}/>}
+        {confirm && <ConfirmTale isopen={confirm} onclose={onConfirm} orBal={balance}/>}
     </React.Fragment>
   )
 }

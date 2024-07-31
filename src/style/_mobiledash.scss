@@ -192,7 +192,11 @@ $numlinlen: 16px;
         text-transform: capitalize;
         border: none;
         outline: none;
-        background-color: transparent;
+        padding: 7px;
+        border-radius: 10px;
+        color: $light-grey;
+        background: linear-gradient(to right, #0088E5, #0079CC, #0097FF);
+        // background-color: transparent;
         cursor: pointer;
         svg {
             position: static;
@@ -250,7 +254,7 @@ $numlinlen: 16px;
 }
 
 .denomselect {
-    background-color: #0099ff40;
+    // background-color: #0099ff40;
     padding: 15px;
     padding-bottom: 20px;
     h6, p{

@@ -59,7 +59,7 @@ export function getRandomText(array) {
 
 export const colorArray = ['FFE9D0', 'E9FF97', 'FFD18E', 'FFFED3', 'D8EFD3', 'FFEEA9', 'E7D4B5', '95D2B3']
 
-export const denomArray = ['100', '200', '1000', '500', '2000', '5000', '1500'];
+export const denomArray = ['100', '200', '1000', '500', '2000', '5000', '1500', '2500'];
 
 export const allOtherTelcos = [
   'ipnx', 'spectranet', 'starcom', 'ntel', 'starlink', 'verizon'

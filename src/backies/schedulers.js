@@ -278,5 +278,40 @@ export const createUserOrders = async (user, cart) => {
 };
 
 
+export const getUserBalances = async (user) => {
+    console.log("called balances")
+    try {
+        const response = await axios.get(`${baseUrl}/all/wallet/${user}`);
+
+        return {
+            data: response.data,
+            status: response.status
+        }
+    } catch (error) {
+        return {
+            data: error.response ? error.response.data : 'Network Error',
+            status: error.response ? error.response.status : 500
+        };
+    }
+}
+
+
+export const deductUserBalances = async (user, amount) => {
+    try {
+        const response = await axios.post(`${baseUrl}all/wallet/${user}/deduct`, {amount});
+
+        return {
+            data: response.data,
+            status: response.status
+        }
+    } catch (error) {
+        return {
+            data: error.response ? error.response.data : 'Network Error',
+            status: error.response ? error.response.status : 500
+        };
+    }
+}
+
+
 
 
