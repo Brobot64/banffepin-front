@@ -298,7 +298,7 @@ export const getUserBalances = async (user) => {
 
 export const deductUserBalances = async (user, amount) => {
     try {
-        const response = await axios.post(`${baseUrl}all/wallet/${user}/deduct`, {amount});
+        const response = await axios.post(`${baseUrl}/all/wallet/${user}/deduct`, {amount});
 
         return {
             data: response.data,

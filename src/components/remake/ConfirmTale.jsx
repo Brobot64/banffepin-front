@@ -49,19 +49,18 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
         setLoading(true);
         setMessage('');
 
-        const deductAmount = await deductUserBalances(userId, (Number(debitAmount()) - Number(tax)).toLocaleString());
-
-        if (deductAmount.status !== 200 || debitAmount.status !== 201) {
-            setResStat(true);
-            setMessage('Insufficient Amount');
-            setLoading(false);
-            setTimeout(() => {
-                window.location.reload();
-            }, 5000);
-            return;
-        }
-
         try {
+            const deductAmount = await deductUserBalances(userId, (Number(debitAmount()) - Number(tax)));
+
+            if (deductAmount.status !== 200 || debitAmount.status !== 201) {
+                setResStat(true);
+                setMessage('Insufficient Amount');
+                setLoading(false);
+                setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
+                return;
+            }
             const response = await createUserOrders(userId, cart);
             if (response.status === 200 || response.status === 201) {
                 setAssignedPins(response.data);
@@ -100,7 +99,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
     const formattedTax = Number(tax).toLocaleString();
     const formattedTotalCost = Number(debitAmount() + tax).toLocaleString();
 
-    const mainAmt = (Number(orBal) - Number(debitAmount()) - Number(tax)).toLocaleString();
+    const mainAmt = (Number(orBal) - Number(debitAmount()) - Number(tax));
 
     return (
         <React.Fragment>
@@ -148,7 +147,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                     </div>
                     <div>
                         <p>balance after debit</p>
-                        <h5>{mainAmt < 0 ? `n ${mainAmt}` : 'Insufficient Amount'}</h5>
+                        <h5>{mainAmt >= 0 ? (`n ${mainAmt}`) : ('Insufficient Amount')}</h5>
                     </div>
                     <div>
                         <p>telco</p>
@@ -159,7 +158,9 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                         <p>total cost</p>
                         <h5 style={{ color: '#00A41A' }}>n {formattedTotalCost}</h5>
                     </div>
-                    <button disabled={mainAmt < 0} onClick={handlePay}>confirm</button>
+                    {/* <button disabled={mainAmt < 0} onClick={handlePay}>confirm</button> */}
+                    <button disabled={mainAmt <= -1} onClick={handlePay}>confirm</button>
+
                     <button onClick={handleCancel} style={{ marginBottom: '20px' }} className='cancel'>cancel</button>
                 </div>
             </div>

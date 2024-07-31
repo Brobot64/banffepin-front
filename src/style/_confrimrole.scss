@@ -136,6 +136,9 @@
             background-color: #48b4fde9;
             transition: all .3s ease-in-out;
         }
+        &:disabled {
+            background-color: $light-grey;
+        }
         &.cancel {
             background-color: transparent;
             color: #00000099;
