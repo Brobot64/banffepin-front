@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import ImageCrack from '../thins/ImageCrack';
 
 
 export function formatDateTime(dateTimeString) {
     // Parse the date-time string
     const date = new Date(dateTimeString);
+
   
     // Format the date
     const options = { day: '2-digit', month: 'short', year: 'numeric' };
@@ -33,6 +35,10 @@ const HistoryView = ({ data }) => {
     const { name, denomination, quantity, date, time, id = '688bhbvEyy8' } = data || {};
     const amount = denomination && quantity ? parseInt(denomination) * parseInt(quantity) : 0;
 
+    function removespace(text) {
+        return text.replace(/\s/g, "");
+    }
+
     const handleReturn = () => {
         navigate(-1);
     }
@@ -48,7 +54,7 @@ const HistoryView = ({ data }) => {
                 <h1>Order Summary</h1>
                 <div className="upper">
                     <div>
-                        <img src="/mtn.png" alt="Logo" />
+                        <ImageCrack name={name}/>
                         <h3>{name || 'Name'}</h3>
                     </div>
 

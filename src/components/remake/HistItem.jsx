@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import ImageCrack from '../thins/ImageCrack';
 
 const HistItem = ({data, onClick}) => {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ const HistItem = ({data, onClick}) => {
   return (
     <div className='hist-item' onClick={onClick}>
         <div className={`item-name ${name}`}>
-            <img src={`/${removespace(name.toLowerCase())}.png`} alt={`banffpay ${name}`} onerror="this.src = '/9mobile.png';" />
+            {/* <img src={`/${removespace(name.toLowerCase())}.png`} alt={`banffpay ${name}`} onerror="this.src = '/9mobile.png';" /> */}
+            <ImageCrack name={name}/>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h5>{name} e-pin</h5>
                 <p>&#8358;{denomination.toLocaleString()} x <span>{quantity}</span></p>

@@ -20,6 +20,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
     const handleModal = () => {
         setOpenModal(!openModal);
         handleCancel();
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -48,11 +49,12 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
         console.log('chance: ', chance);
         setLoading(true);
         setMessage('');
-
+    
         try {
-            const deductAmount = await deductUserBalances(userId, (Number(debitAmount()) - Number(tax)));
-
-            if (deductAmount.status !== 200 || debitAmount.status !== 201) {
+            const debitAmountValue = Number(debitAmount()) + Number(tax);
+            const deductAmount = await deductUserBalances(userId, debitAmountValue);
+    
+            if (deductAmount.status !== 200 && deductAmount.status !== 201) {
                 setResStat(true);
                 setMessage('Insufficient Amount');
                 setLoading(false);
@@ -61,6 +63,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                 }, 5000);
                 return;
             }
+    
             const response = await createUserOrders(userId, cart);
             if (response.status === 200 || response.status === 201) {
                 setAssignedPins(response.data);
@@ -86,11 +89,19 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
             }, 3000);
         }
     };
+    
 
     const handleCancel = () => {
         localStorage.removeItem('order');
         onclose();
     };
+
+    const closeUp = () => {
+        handleCancel();
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    }
 
     if (!isopen) return null;
 
@@ -147,7 +158,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                     </div>
                     <div>
                         <p>balance after debit</p>
-                        <h5>{mainAmt >= 0 ? (`n ${mainAmt}`) : ('Insufficient Amount')}</h5>
+                        <h5>{mainAmt >= 0 ? (`n ${mainAmt.toLocaleString()}`) : ('Insufficient Amount')}</h5>
                     </div>
                     <div>
                         <p>telco</p>
@@ -161,7 +172,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                     {/* <button disabled={mainAmt < 0} onClick={handlePay}>confirm</button> */}
                     <button disabled={mainAmt <= -1} onClick={handlePay}>confirm</button>
 
-                    <button onClick={handleCancel} style={{ marginBottom: '20px' }} className='cancel'>cancel</button>
+                    <button onClick={closeUp} style={{ marginBottom: '20px' }} className='cancel'>cancel</button>
                 </div>
             </div>
 

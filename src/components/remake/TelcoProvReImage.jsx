@@ -71,6 +71,7 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
     };
 
     const handleIncrement = () => {
+        if (quantity >= 9999) return;
         setQuantity((prevQuantity) => prevQuantity + 1);
     };
 
@@ -136,6 +137,8 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
                                 type="text"
                                 value={quantity}
                                 onChange={handleInputChange}
+                                max={9999}
+                                maxLength={4}
                             />
                             <button onClick={handleIncrement}>+</button>
                         </div>
