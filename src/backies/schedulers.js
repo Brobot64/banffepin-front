@@ -261,9 +261,9 @@ export const getUserOrders = async (user, query = {}, dateOption = '', customSta
 };
 
 
-export const createUserOrders = async (user, cart) => {
+export const createUserOrders = async (user, cart, pin) => {
     try {
-        const response = await axios.post(`${baseUrl}/pin/vend/${user}`, cart);
+        const response = await axios.post(`${baseUrl}/pin/vend/${user}?pin=${pin}`, cart);
 
         return {
             data: response.data,
@@ -299,6 +299,62 @@ export const getUserBalances = async (user) => {
 export const deductUserBalances = async (user, amount) => {
     try {
         const response = await axios.post(`${baseUrl}/all/wallet/${user}/deduct`, {amount});
+
+        return {
+            data: response.data,
+            status: response.status
+        }
+    } catch (error) {
+        return {
+            data: error.response ? error.response.data : 'Network Error',
+            status: error.response ? error.response.status : 500
+        };
+    }
+}
+
+export const refundUserBalances = async (user, amount) => {
+    try {
+        const response = await axios.put(`${baseUrl}/all/wallet/${user}`, {amount});
+
+        return {
+            data: response.data,
+            status: response.status
+        }
+    } catch (error) {
+        return {
+            data: error.response ? error.response.data : 'Network Error',
+            status: error.response ? error.response.status : 500
+        };
+    }
+}
+
+export const getIfPinAdded = async (user) => {
+    try {
+        const response = await axios.get(`${baseUrl}/auth/pin/check/${user}`);
+        return {
+            data: response.data,
+            status: response.status
+        }
+    } catch (error) {
+        return {
+            data: error.response ? error.response.data : 'Network Error',
+            status: error.response ? error.response.status : 500
+        };
+    }
+}
+
+/**
+ * Adding the create transaction pin for users;
+ * Add modal to pass transaction pin before vending;
+ **/
+
+export const addTransactionPin = async (token, data) => {
+    try {
+        const response = await axios.post(`${baseUrl}/auth/pin/set`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
 
         return {
             data: response.data,

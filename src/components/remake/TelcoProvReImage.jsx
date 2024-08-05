@@ -45,6 +45,7 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
     const [quantity, setQuantity] = useState(1);
 
     const handleSelectDenomination = (value) => {
+        setQuantity(1)
         setActiveNode(value);
     };
 
@@ -130,7 +131,7 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
 
                 {activeNode && (
                     <div className="quantitydetl">
-                        <p>Purchase Quantity ({telname})</p>
+                        <p>Purchase Quantity ({telname})&nbsp;Pricing: {activeNode * quantity}</p>
                         <div className="inputslide">
                             <button onClick={handleDecrement}>-</button>
                             <input

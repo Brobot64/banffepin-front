@@ -25,7 +25,7 @@ const MobileDashBoard = () => {
           <Routes>
               <Route 
                   path="/" 
-                  element={user ? (user.usertype === "admin" ? <MobileDash /> : <LoginRemake />) : <Navigate to="/" />} 
+                  element={user ? (user.usertype === "agent" ? <MobileDash /> : <LoginRemake />) : <Navigate to="/" />} 
               />
               <Route element={<OrderConfirmation />} path='/confirmorder' />
               <Route element={<FullHistory />} path='/history' />

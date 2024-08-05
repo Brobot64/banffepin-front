@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Loader from './Loader';
 import Modal from '../Modal';
 import { SecTemp } from './ReactPdf';
-import { createUserOrders, deductUserBalances } from '../../backies/schedulers';
+import { createUserOrders, deductUserBalances, refundUserBalances } from '../../backies/schedulers';
 import ResponseDisp from './ResponseDisp';
+import PinInput from './PinInput';
 
 export function randomBool() {
     return Math.random() >= 0.8; // 0.5 represents a 50% chance of true or false
@@ -15,12 +16,18 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
     const [openModal, setOpenModal] = useState(false);
     const [resSta, setResStat] = useState(true);
     const [message, setMessage] = useState('');
+    const [authPin, setAuthPin] = useState('');
     const [assignedPins, setAssignedPins] = useState(null);
 
     const handleModal = () => {
         setOpenModal(!openModal);
         handleCancel();
         window.location.reload();
+    }
+
+    const handleSetPin = (pin) => {
+        setAuthPin(pin);
+        setOpenModal(!openModal);
     }
 
     useEffect(() => {
@@ -37,6 +44,12 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
 
     const handlePay = async (e) => {
         e.preventDefault();
+
+        if (!authPin || authPin === '') {
+            setOpenModal(!openModal);
+            return;
+        }
+
         const user = JSON.parse(sessionStorage.getItem('user'));
         const userId = user ? user.id : null;
         const dabar = {
@@ -64,7 +77,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                 return;
             }
     
-            const response = await createUserOrders(userId, cart);
+            const response = await createUserOrders(userId, cart, authPin);
             if (response.status === 200 || response.status === 201) {
                 setAssignedPins(response.data);
                 setResStat(false);
@@ -75,16 +88,19 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                 setResStat(true);
                 setMessage('Error creating order: ' + response.data.error);
                 setLoading(false);
-                setTimeout(() => {
+                setTimeout(async () => {
+                    await refundUserBalances(userId, debitAmountValue);
                     handleCancel();
                 }, 3000);
             }
         } catch (error) {
             console.error('Error during the transaction:', error);
+            const debitAmountValue = Number(debitAmount()) + Number(tax);
             setResStat(true);
             setMessage('Transaction Error');
             setLoading(false);
-            setTimeout(() => {
+            setTimeout(async () => {
+                await refundUserBalances(userId, debitAmountValue);
                 handleCancel();
             }, 3000);
         }
@@ -177,7 +193,11 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
             </div>
 
             <Modal isOpen={openModal} onClose={handleModal}>
-                <SecTemp assignments={assignedPins} />
+                {
+                    authPin === '' ? <PinInput isPin={true} handleSubmit={handleSetPin}/> :
+                    <SecTemp assignments={assignedPins} />
+                }
+                
             </Modal>
         </React.Fragment>
     );

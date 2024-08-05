@@ -41,6 +41,7 @@ const LoginComp = () => {
                 localStorage.setItem('token', response.data.token);
                 const users = await userInfo(response.data.token);
                 sessionStorage.setItem('user', JSON.stringify(users.data));
+                setResStat(false);
                 setError('Logging Successful');
                 setTimeout(() => {
                     setError('');
