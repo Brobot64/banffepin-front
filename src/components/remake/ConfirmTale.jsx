@@ -11,7 +11,7 @@ export function randomBool() {
 }
 
 const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
-    const [orders, setOrders] = useState({});
+    const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [resSta, setResStat] = useState(true);
@@ -31,15 +31,13 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
     }
 
     useEffect(() => {
-        const orderData = JSON.parse(localStorage.getItem('order'));
-        setOrders(orderData || {});
+        const orderData = JSON.parse(localStorage.getItem('orders'));
+        setOrders(orderData || []);
+        console.log(orders);
     }, []);
 
     const debitAmount = () => {
-        if (orders && orders.volume && orders.denomination) {
-            return parseInt(orders.volume) * parseInt(orders.denomination);
-        }
-        return 0;
+        return orders.reduce((total, order) => total + (parseInt(order.denomination) * parseInt(order.quantity)), 0);
     };
 
     const handlePay = async (e) => {
@@ -52,12 +50,11 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
 
         const user = JSON.parse(sessionStorage.getItem('user'));
         const userId = user ? user.id : null;
-        const dabar = {
-            denomination: orders.denomination,
-            quantity: orders.volume,
-            telco: orders.name
-        };
-        const cart = [dabar];
+        const cart = orders.map(order => ({
+            denomination: order.denomination,
+            quantity: order.quantity,
+            telco: order.telco
+        }));
         const chance = randomBool();
         console.log('chance: ', chance);
         setLoading(true);
@@ -77,7 +74,7 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                 return;
             }
     
-            const response = await createUserOrders(userId, cart, authPin);
+            const response = await createUserOrders(userId, orders, authPin);
             if (response.status === 200 || response.status === 201) {
                 setAssignedPins(response.data);
                 setResStat(false);
@@ -105,10 +102,9 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
             }, 3000);
         }
     };
-    
 
     const handleCancel = () => {
-        localStorage.removeItem('order');
+        localStorage.removeItem('orders');
         onclose();
     };
 
@@ -138,24 +134,23 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                     </div>
                 )}
                 <div className="glass-confirm">
-                    {/* <h3>confirmation</h3>
-                    <svg onClick={onclose} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M4.95012 4.94929C5.34064 4.55877 5.97381 4.55877 6.36433 4.94929L14.8496 13.4346C15.2401 13.8251 15.2401 14.4583 14.8496 14.8488C14.4591 15.2393 13.8259 15.2393 13.4354 14.8488L4.95012 6.36351C4.5596 5.97298 4.5596 5.33982 4.95012 4.94929Z" fill="#0F0F0F" />
-                        <path d="M4.94929 14.8497C4.55877 14.4592 4.55877 13.826 4.94929 13.4355L13.4346 4.95019C13.8251 4.55967 14.4583 4.55967 14.8488 4.95019C15.2393 5.34071 15.2393 5.97388 14.8488 6.3644L6.36351 14.8497C5.97298 15.2402 5.33982 15.2402 4.94929 14.8497Z" fill="#0F0F0F" />
-                    </svg> */}
                     <p style={{ margin: 'auto', fontWeight: 'bold' }}>purchase details</p>
                     <table>
                         <thead>
                             <tr>
-                                <th>cost per unit</th>
-                                <th>quantity</th>
+                                <th>Telco</th>
+                                <th>Cost Per Unit</th>
+                                <th>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>n {orders ? Number(orders.denomination).toLocaleString() : '0'}</td>
-                                <td>{orders ? orders.volume : 'null'}</td>
-                            </tr>
+                            {orders.map((order, index) => (
+                                <tr key={index}>
+                                    <td>{order.telco}</td>
+                                    <td>N {Number(order.denomination).toLocaleString()}</td>
+                                    <td>{order.quantity}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className="totals">
@@ -164,48 +159,35 @@ const ConfirmTale = ({ isopen, onclose, orBal = 20000, tax = 1000 }) => {
                             <p>tax</p>
                         </div>
                         <div className="pricings">
-                            <p>n {formattedDebitAmount}</p>
-                            <p>n {formattedTax}</p>
+                            <p>N {formattedDebitAmount}</p>
+                            <p>N {formattedTax}</p>
                         </div>
                     </div>
                     <div>
                         <p>balance before purchase</p>
-                        <h5>n {formattedOrBal}</h5>
+                        <h5>N {formattedOrBal}</h5>
                     </div>
                     <div>
                         <p>balance after debit</p>
-                        <h5>{mainAmt >= 0 ? (`n ${mainAmt.toLocaleString()}`) : ('Insufficient Amount')}</h5>
+                        <h5>{mainAmt >= 0 ? (`N ${mainAmt.toLocaleString()}`) : ('Insufficient Amount')}</h5>
                     </div>
-                    <div>
-                        <p>telco</p>
-                        <h5>{orders ? orders.name : 'null'}</h5>
-                    </div>
-                    
                     <div>
                         <p>total cost</p>
-                        <h5 style={{ color: '#00A41A' }}>n {formattedTotalCost}</h5>
+                        <h5 style={{ color: '#00A41A' }}>N {formattedTotalCost}</h5>
                     </div>
-                    {/* <button disabled={mainAmt < 0} onClick={handlePay}>confirm</button> */}
                     <button disabled={mainAmt <= -1} onClick={handlePay}>confirm</button>
-
                     <button onClick={closeUp} style={{ marginBottom: '20px' }} className='cancel'>cancel</button>
                 </div>
             </div>
 
             <Modal isOpen={openModal} onClose={handleModal}>
                 {
-                    authPin === '' ? <PinInput isPin={true} handleSubmit={handleSetPin}/> :
+                    authPin === '' ? <PinInput isPin={true} handleSubmit={handleSetPin} /> :
                     <SecTemp assignments={assignedPins} />
                 }
-                
             </Modal>
         </React.Fragment>
     );
 };
 
 export default ConfirmTale;
-
-
-
-
-

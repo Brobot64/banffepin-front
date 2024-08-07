@@ -1,0 +1,123 @@
+$primary-blue: #0097ff;
+$clean-border: #999999;
+$off-white: #E8F0F1;
+$dirty-white: #efefef;
+$freak-blue: #256A99;
+
+
+.multiplevend {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    min-height: 100px;
+
+    button {
+        padding: 7px 15px;
+        border: none;
+        background-color: $primary-blue;
+        border-radius: 10px;
+        color: $dirty-white;
+        width: fit-content;
+        height: fit-content;
+        cursor: pointer;
+        &.main {
+            margin: auto;
+        }
+    }
+
+    .allvents {
+        width: 100%;
+        h3 {
+            margin: 0 auto;
+        }
+        .listings {
+            width: 95%;
+            max-width: 95%;
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            .row {
+                display: flex;
+                gap: 5px;
+                p {
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    background-color: $off-white;
+                    border-bottom: 1px solid $clean-border;
+                    font-size: 12px;
+                    line-height: 13.77px;
+                    text-transform: capitalize;
+                    text-wrap: nowrap;
+                    font-weight: 400;
+                    white-space: nowrap;
+                    &.nums {
+                        color: $freak-blue;
+                        max-height: fit-content;
+                        box-sizing: border-box;
+                        height: fit-content;
+                        max-height: fit-content;
+                    }
+                    &.tup {
+                        width: 80px;
+                        max-width: 80px;
+                        box-sizing: border-box;
+                        height: fit-content;
+                        max-height: fit-content;
+                        overflow: hidden;
+                    }
+                }
+                select, input {
+                    font-family: "Rubik", sans-serif;
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    background-color: $off-white;
+                    border: none;
+                    border-bottom: 1px solid $clean-border;
+                    font-size: 12px;
+                    line-height: 13.77px;
+                    text-transform: capitalize;
+                    text-wrap: nowrap;
+                    white-space: nowrap;
+                    font-weight: 400;
+                    height: fit-content;
+                    max-height: fit-content;
+                    &.telco {
+                        max-width: 60px;
+                        box-sizing: border-box;
+                    }
+                    &.tel-denom {
+                        max-width: 70px;
+                        box-sizing: border-box;
+                    }
+                }
+                input {
+                    max-width: 70px;
+                    box-sizing: border-box;
+                    outline: none;
+                    &.qty {
+                        width: 50px;
+                        max-width: 50px;
+                        overflow: hidden;
+                    }
+                }
+                select {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                }
+                input[type="number"] {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                }
+                button {
+                    padding: 5px 10px;
+                }
+            }
+        }
+    }
+}

@@ -273,7 +273,7 @@
         margin: 5px 0;
 
         p {
-        text-transform: capitalize;
+        text-transform: capitalize; 
         }
     }
     }
@@ -281,6 +281,9 @@
     .peasy {
     max-height: 520px;
     overflow-y: auto;
+    &.hide {
+        display: block;
+    }
 
     ol {
         display: flex;

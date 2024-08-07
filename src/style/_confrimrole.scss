@@ -78,6 +78,10 @@
         th:nth-child(even) {
             text-align: right;
         }
+        
+        th:nth-child(2n) {
+            text-align: center;
+        }
 
         tr {
             &:hover {
@@ -95,6 +99,12 @@
                 width: fit-content;
                 padding-right: 20px;
             }
+            td:nth-child(2n) {
+                text-align: center;
+            }
+            // td:last-child {
+            //     text-align: right;
+            // }
         }
     }
 

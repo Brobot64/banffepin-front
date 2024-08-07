@@ -10,6 +10,7 @@ import TelcoProvReImage from './TelcoProvReImage'
 import { getIfPinAdded, getReminder, getUserBalances, getUserOrders } from '../../backies/schedulers'
 import { formatDateTime } from './HistoryView';
 import PinInput from './PinInput'
+import MultipleVend from './MultipleVend'
 
 const MobileDash = () => {
     const [selector, setSelector] = React.useState(false);
@@ -150,7 +151,7 @@ const MobileDash = () => {
                 {/* <a href="">schedule transactions&nbsp;&gt;</a> */}
             </div>
 
-            <div className="telcogather">
+            {/* <div className="telcogather">
                 <div className='alltelco'>
                     <div className={`telco ${telco && telco.toLowerCase() === 'airtel' && 'active'}`} onClick={() => handleTelco('airtel')}>
                         <img src="/airtel.png" alt="banffpay telco" />
@@ -174,9 +175,11 @@ const MobileDash = () => {
                     others 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="down-arrow"><path d="M16 22a2 2 0 0 1-1.41-.59l-10-10a2 2 0 0 1 2.82-2.82L16 17.17l8.59-8.58a2 2 0 0 1 2.82 2.82l-10 10A2 2 0 0 1 16 22Z"></path></svg>
                 </button>
-            </div>  
+            </div>
 
-            {selector && <TelcoProvReImage telname={telco} handleLoader={handleLoader} handlepop={onConfirm} denoms={telcos}/>}
+            {selector && <TelcoProvReImage telname={telco} handleLoader={handleLoader} handlepop={onConfirm} denoms={telcos}/>} */}  
+
+            <MultipleVend handlePop={onConfirm} handldeLoader={handleLoader}/>
 
             <div className="recenttransact">
                 <div className="top-action">
