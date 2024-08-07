@@ -8,23 +8,17 @@ export function mergeArraysWithoutDuplicates(...arrays) {
 }
 
 function concatAndSortArrays(arr1, arr2) {
-    // Create a new set to store unique items
     let resultSet = new Set(arr2);
-    
-    // Add items from the first array until the set has 8 items
     for (let item of arr1) {
         if (resultSet.size >= 8) break;
         resultSet.add(item);
     }
-    
-    // Convert the set back to an array and sort it
     return Array.from(resultSet).sort((a, b) => parseInt(a) - parseInt(b));
 }
 
 export function isValueInArray(array, value) {
     return array.includes(value);
 }
-  
 
 export function abbreviateNumber(num) {
   if (num >= 1000000) {
@@ -45,23 +39,22 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
     const [quantity, setQuantity] = useState(1);
 
     const handleSelectDenomination = (value) => {
-        setQuantity(1)
+        setQuantity(1);
         setActiveNode(value);
     };
 
     const handleClick = () => {
-      handleLoader(true);
-      const order = {
-        name: telname,
-        denomination: activeNode,
-        volume: quantity
-      }
-      localStorage.setItem('order', JSON.stringify(order));
-      setTimeout(() => {
-        handleLoader(false);
-        handlepop();
-        // navigate('/mobile/confirmorder');
-      }, 5000);
+        handleLoader(true);
+        const order = {
+            name: telname,
+            denomination: activeNode,
+            volume: quantity
+        };
+        localStorage.setItem('order', JSON.stringify(order));
+        setTimeout(() => {
+            handleLoader(false);
+            handlepop();
+        }, 5000);
     };
 
     const handleInputChange = (event) => {
@@ -83,21 +76,18 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
     useEffect(() => {
         const fetchTelcos = async () => {
             try {
-                // const response = await getReminder(); // Adjust the endpoint if necessary
-                // const fetchedTelcos = response.data.data;
-                // setTelcos(fetchedTelcos);
-
-                const selectedTelco = denoms.find(t => t.telco.toLowerCase() === telname);
-                setDenominations(selectedTelco ? selectedTelco.denominations : []);
-                setRistDenominations(concatAndSortArrays(denomArray, selectedTelco.denominations));
+                const selectedTelco = denoms.find(t => t.telco.toLowerCase() === telname.toLowerCase());
+                const telcoDenominations = selectedTelco ? selectedTelco.denominations.map(d => d.denomination) : [];
+                setDenominations(telcoDenominations);
+                setRistDenominations(concatAndSortArrays(denomArray, telcoDenominations));
             } catch (error) {
                 console.error(error);
             }
         };
         setActiveNode(null);
-        setQuantity(1)
+        setQuantity(1);
         fetchTelcos();
-    }, [telname]);
+    }, [telname, denoms]);
 
     return (
         <div className='overallselect'>
@@ -105,29 +95,17 @@ const TelcoProvReImage = ({ telname = 'MTN', handleLoader, handlepop, denoms }) 
                 <h6>Select Denomination ({telname.toUpperCase()})</h6>
 
                 <div className="revampdenom">
-                    {
-                        ristDenominations.map((denomination, i) => (
-                            <button disabled={!isValueInArray(denominations, denomination)} className={`timy node ${activeNode === denomination ? 'active' : ''}`} onClick={() => handleSelectDenomination(denomination)} >
-                                {denomination}
-                            </button>
-                        ))
-                    }
-                </div>
-
-                {/* <div className="number-line">
                     {ristDenominations.map((denomination, i) => (
-                        <div
-                            className={`node ${activeNode === denomination ? 'active' : ''}`}
-                            onClick={() => handleSelectDenomination(denomination)}
+                        <button
                             key={i}
+                            disabled={!isValueInArray(denominations, denomination)}
+                            className={`timy node ${activeNode === denomination ? 'active' : ''}`}
+                            onClick={() => handleSelectDenomination(denomination)}
                         >
-                            <div className='inner'>
-                                <p>{abbreviateNumber(denomination)}</p>
-                                <span className="line"/>
-                            </div>
-                        </div>
+                            {denomination}
+                        </button>
                     ))}
-                </div> */}
+                </div>
 
                 {activeNode && (
                     <div className="quantitydetl">
