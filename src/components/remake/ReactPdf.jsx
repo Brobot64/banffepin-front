@@ -75,12 +75,7 @@ export const SecTemp = ({ assignments }) => {
     `;
   };
 
-
   const handleView = () => setView(!view);
-
-  // const handlePrint = () => {
-  //   console.log(componentRef.current)
-  // }
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -140,41 +135,45 @@ export const SecTemp = ({ assignments }) => {
     <React.Fragment>
       <div className="epin-print" id="pinsy" ref={componentRef}>
         {Object.entries(assignments).map(([telco, details]) => (
-          <>
-            <div className="top">
-              <h2>{telco.toUpperCase()} e-pins</h2>
-              <div>
-                <p>{`${handleSplit(2, details.timAt)} ${handleSplit(1, details.timAt)}, ${handleSplit(3, details.timAt)}`}</p>
-                <p>{flinst.time}</p>
-              </div>
-              <div>
-                <p>denomination: n {details.denomination.toLocaleString()}</p>
-                <p>x {details.pins.length}</p>
-              </div>
-            </div>
+          Object.entries(details).map(([denomination, value]) => (
+            denomination !== 'timAt' && value.pins ? (
+              <React.Fragment key={`${telco}-${denomination}`}>
+                <div className="top">
+                  <h2>{`${telco.toUpperCase()} e-pins`}</h2>
+                  <div>
+                    <p>{`${flinst.date}`}</p>
+                    <p>{flinst.time}</p>
+                  </div>
+                  <div>
+                    <p>denomination: n {denomination.toLocaleString()}</p>
+                    <p>x {value.pins.length}</p>
+                  </div>
+                </div>
 
-            <div className={`peasy ${view ? '' : 'hide'}`}>
-              <ol type={'1'}>
-                {details.pins.map((pin, index) => (
-                  <li key={index}>{pin}</li>
-                ))}
-              </ol>
-            </div>
+                <div className={`peasy ${view ? '' : 'hide'}`}>
+                  <ol type={'1'}>
+                    {value.pins.map((pin, index) => (
+                      <li key={index}>{pin}</li>
+                    ))}
+                  </ol>
+                </div>
 
-            <div className="buto"> {/* Hide buttons on print */}
-              <button title="print" onClick={handlePrint}>
-                <i className="fa-solid fa-print"></i>
-              </button>
+                <div className="buto">
+                  <button title="print" onClick={handlePrint}>
+                    <i className="fa-solid fa-print"></i>
+                  </button>
 
-              <button title="view" onClick={handleView}>
-                <i className="fa-solid fa-display"></i>
-              </button>
+                  <button title="view" onClick={handleView}>
+                    <i className="fa-solid fa-display"></i>
+                  </button>
 
-              <button title="download" onClick={downloadPDF}>
-                <i className="fa-solid fa-download"></i>
-              </button>
-            </div>
-          </>
+                  <button title="download" onClick={downloadPDF}>
+                    <i className="fa-solid fa-download"></i>
+                  </button>
+                </div>
+              </React.Fragment>
+            ) : null
+          ))
         ))}
       </div>
     </React.Fragment>
