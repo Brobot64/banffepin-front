@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Banff E-Pin Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Banff E-Pin Frontend repository! This project is a web application designed for managing and purchasing electronic pins (E-Pins) for various telecom providers. The application allows users to register, log in, create orders, and manage their transactions seamlessly.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [API Integration](#api-integration)
 
-### `npm start`
+## Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Banff E-Pin Frontend is built using React and provides a user-friendly interface for users to interact with the backend services. The application supports user authentication, order management, and transaction history viewing. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Key Components
 
-### `npm test`
+- **User   Registration and Login**: Users can create an account and log in to access their dashboard.
+- **Order Management**: Users can create, view, and manage their E-Pin orders.
+- **Transaction History**: Users can view their past transactions and order details.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- **React**: A JavaScript library for building user interfaces.
+- **React Router**: For routing and navigation within the application.
+- **Axios**: For making HTTP requests to the backend API.
+- **CSS/SCSS**: For styling the application.
+- **JavaScript ES6+**: For modern JavaScript features.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To set up the project locally, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Brobot64/banffepin-front.git
 
-### `npm run eject`
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Navigate to the project directory**:
+``` bash
+cd banffepin-front
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Start the development server**:
+    ```bash
+    npm start
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. **Open your browser** and navigate to **http://localhost:3000** to view the application.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
+Once the application is running, users can:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Register**: Fill out the registration form to create a new account
+- **Log In**: Use the registered credentials to log in.
+- **Create Orders**: Select a telecom provider and denomination to create an order.
+- **View Transaction History**: Access the history of all transactions made.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Features
+- User authentication (registration and login)
+- Create and manage E-Pin orders
+- View transaction history
+- Responsive design for mobile and desktop views
+- Error handling and user feedback
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Folder Structure
+The project follows a structured folder organization for better maintainability:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+src/
+├── components/          # Reusable components
+│   ├── Login.jsx       # Login component
+│   ├── RegisterUser .jsx# Registration component
+│   ├── OrderConfirmation.jsx # Order confirmation component
+│   └── ...             # Other components
+├── screens/            # Screen components
+│   ├── LoginRemake.jsx # Login screen
+│   ├── Dashboard.jsx    # Dashboard screen
+│   └── ...             # Other screens
+├── backies/            # API integration
+│   ├── schedulers.js   # API functions for user and order management
+│   └── ...             # Other API functions
+├── App.jsx             # Main application component
+└── index.js            # Entry point of the application
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## API Integration
+The application communicates with a backend API for user authentication and order management. The API endpoints are defined in the backies/schedulers.js file. Ensure that the backend service is running and accessible for the frontend to function correctly.
 
-### Deployment
+### Example API Endpoints
+- **POST /api/register**: Register a new user
+- **POST /api/login**: Authenticate a user
+- **POST /api/orders**: Create a new order
+- **GET /api/orders/history**: Retrieve transaction history
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
